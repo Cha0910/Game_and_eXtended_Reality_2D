@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import io.Term_2D_Game.Player.Player;
@@ -95,7 +96,7 @@ public class Main extends ApplicationAdapter {
         if (currentState == GameState.PAUSED) {
             drawCenteredText(batch, "PAUSE");
         } else if (currentState == GameState.ENDED) {
-            drawCenteredText(batch, "GAME OVER");
+            drawCenteredText(batch, "GAME OVER\n Press 'R' to Restart");
         }
         batch.end();
     }
@@ -158,9 +159,8 @@ public class Main extends ApplicationAdapter {
     }
 
     private void drawCenteredText(SpriteBatch batch, String text) {
-        layout.setText(uiFont, text);
         OrthographicCamera camera = cameraManager.getCamera();
-
+        layout.setText(uiFont, text, Color.WHITE, 400f, Align.center, true);
         float x = camera.position.x - layout.width / 2f;
         float y = camera.position.y + layout.height / 2f;
 
