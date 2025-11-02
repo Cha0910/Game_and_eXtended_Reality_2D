@@ -1,0 +1,117 @@
+{
+  "playerStart": {"x":-63, "y":128},
+
+  "levelSize": {"x":3520, "y":1440},
+
+  "blocks": [
+    {"x": 0, "y": 0, "type":"sand", "sprite": "sand_center","length": 21},
+    {"x": 21, "y": 0, "type":"sand", "sprite": "sand_top","length": 5},
+    {"x": 26, "y": 0, "type":"sand", "sprite": "sand_center","length": 3},
+    {"x": 29, "y": 0, "type":"sand", "sprite": "sand_right","length": 1},
+    {"x": 47, "y": 0, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 48, "y": 0, "type":"sand", "sprite": "sand_center","length": 7},
+
+    {"x": 0, "y": 1, "type":"sand", "sprite": "sand_top","length": 7},
+    {"x": 7, "y": 1, "type":"sand", "sprite": "sand_center","length": 13},
+    {"x": 20, "y": 1, "type":"sand", "sprite": "sand_right","length": 1},
+    {"x": 23, "y": 1, "type":"sign", "sprite": "sign","length": 1,
+      "message": "R 키로 재시작"
+    },
+    {"x": 26, "y": 1, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 27, "y": 1, "type":"sand", "sprite": "sand_center","length": 2},
+    {"x": 29, "y": 1, "type":"sand", "sprite": "sand_right","length": 1},
+    {"x": 47, "y": 1, "type":"sand", "sprite": "sand_top_left","length": 1},
+    {"x": 48, "y": 1, "type":"sand", "sprite": "sand_top","length": 7},
+
+    {"x": 4, "y": 2, "type":"sign", "sprite": "sign","length": 1,
+      "message": "Space로 점프"
+    },
+    {"x": 7, "y": 2, "type":"sand", "sprite": "sand_top_left","length": 1},
+    {"x": 8, "y": 2, "type":"sand", "sprite": "sand_top","length": 2},
+    {"x": 10, "y": 2, "type":"sand", "sprite": "sand_center","length": 10},
+    {"x": 20, "y": 2, "type":"sand", "sprite": "sand_right","length": 1},
+    {"x": 26, "y": 2, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 27, "y": 2, "type":"sand", "sprite": "sand_center","length": 2},
+    {"x": 29, "y": 2, "type":"sand", "sprite": "sand_right","length": 1},
+    {"x": 49, "y": 2, "type":"sign", "sprite": "sign","length": 1,
+      "message": "깃발에서 E/C를\n눌러 다음 레벨로"
+    },
+    {"x": 53, "y": 2, "type":"flag", "sprite": "flag_red_a","length": 1, "nextLevel": "level_2"},
+
+    {"x": 10, "y": 3, "type":"sand", "sprite": "sand_top_left","length": 1},
+    {"x": 11, "y": 3, "type":"sand", "sprite": "sand_top","length": 3},
+    {"x": 14, "y": 3, "type":"sand", "sprite": "sand_center","length": 6},
+    {"x": 20, "y": 3, "type":"sand", "sprite": "sand_right","length": 1},
+
+    {"x": 26, "y": 3, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 27, "y": 3, "type":"sand", "sprite": "sand_center","length": 2},
+    {"x": 29, "y": 3, "type":"sand", "sprite": "sand_right","length": 1},
+
+    {"x": 11, "y": 4, "type":"sign", "sprite": "sign","length": 1,
+      "message": "Space를 길게 \n눌러 높은 점프"
+    },
+    {"x": 14, "y": 4, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 15, "y": 4, "type":"sand", "sprite": "sand_center","length": 5},
+    {"x": 20, "y": 4, "type":"sand", "sprite": "sand_right","length": 1},
+    {"x": 26, "y": 4, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 27, "y": 4, "type":"sand", "sprite": "sand_center","length": 2},
+    {"x": 29, "y": 4, "type":"sand", "sprite": "sand_right","length": 1},
+    {"x": 43, "y": 4, "type":"sand", "sprite": "sand_horizontal_left","length": 1},
+    {"x": 44, "y": 4, "type":"sand", "sprite": "sand_horizontal_middle","length": 2},
+    {"x": 46, "y": 4, "type":"sand", "sprite": "sand_horizontal_right","length": 1},
+
+    {"x": 14, "y": 5, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 15, "y": 5, "type":"sand", "sprite": "sand_center","length": 5},
+    {"x": 20, "y": 5, "type":"sand", "sprite": "sand_right","length": 1},
+    {"x": 26, "y": 5, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 27, "y": 5, "type":"sand", "sprite": "sand_center","length": 2},
+    {"x": 29, "y": 5, "type":"sand", "sprite": "sand_right","length": 1},
+
+    {"x": 14, "y": 6, "type":"sand", "sprite": "sand_top_left","length": 1},
+    {"x": 15, "y": 6, "type":"sand", "sprite": "sand_top","length": 2},
+    {"x": 17, "y": 6, "type":"sand", "sprite": "sand_center","length": 3},
+    {"x": 20, "y": 6, "type":"sand", "sprite": "sand_right","length": 1},
+
+    {"x": 26, "y": 6, "type":"sand", "sprite": "sand_top_left","length": 1},
+    {"x": 27, "y": 6, "type":"sand", "sprite": "sand_top","length": 2},
+    {"x": 29, "y": 6, "type":"sand", "sprite": "sand_top_right","length": 1},
+
+    {"x": 34, "y": 6, "type":"sand", "sprite": "sand_horizontal_left","length": 1},
+    {"x": 35, "y": 6, "type":"sand", "sprite": "sand_horizontal_middle","length": 2},
+    {"x": 37, "y": 6, "type":"sand", "sprite": "sand_horizontal_right","length": 1},
+
+    {"x": 27, "y": 7, "type":"sign", "sprite": "sign","length": 1,
+      "message": "  맵 아래로  \n떨어지면 리스폰"
+    },
+    {"x": 17, "y": 7, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 18, "y": 7, "type":"sand", "sprite": "sand_center","length": 2},
+    {"x": 20, "y": 7, "type":"sand", "sprite": "sand_right","length": 1},
+
+    {"x": 17, "y": 8, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 18, "y": 8, "type":"sand", "sprite": "sand_center","length": 2},
+    {"x": 20, "y": 8, "type":"sand", "sprite": "sand_right","length": 1},
+
+    {"x": 17, "y": 9, "type":"sand", "sprite": "sand_left","length": 1},
+    {"x": 18, "y": 9, "type":"sand", "sprite": "sand_center","length": 2},
+    {"x": 20, "y": 9, "type":"sand", "sprite": "sand_right","length": 1},
+
+    {"x": 17, "y": 10, "type":"sand", "sprite": "sand_top_left","length": 1},
+    {"x": 18, "y": 10, "type":"sand", "sprite": "sand_top","length": 2},
+    {"x": 20, "y": 10, "type":"sand", "sprite": "sand_top_right","length": 1}
+  ],
+
+  "icons": [
+    {"x":32, "y":312, "sprite":"w_button"},
+    {"x":96, "y":312, "sprite":"d_button"},
+    {"x":32, "y":256, "sprite":"left_button"},
+    {"x":96, "y":256, "sprite":"right_button"},
+
+    {"x":352, "y":256, "sprite":"space_button_1"},
+    {"x":384, "y":256, "sprite":"space_button_3"},
+
+    {"x":1488, "y":192, "sprite":"r_button"},
+
+    {"x":3376, "y":256, "sprite":"e_button"},
+    {"x":3424, "y":256, "sprite":"c_button"}
+  ]
+}
