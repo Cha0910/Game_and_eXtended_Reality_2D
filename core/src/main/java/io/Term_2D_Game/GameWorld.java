@@ -49,7 +49,7 @@ public class GameWorld {
         box2dWorld.setContactListener(new PlayerContactListener());
         level = new Level(this);
         isEnded = false;
-        currentLevel = "level_2";
+        currentLevel = "level_1";
         blocks = new ArrayList<>();
         loadLevel(currentLevel);
         player = new Player(box2dWorld, level.getPlayerStartPosition(), this);
