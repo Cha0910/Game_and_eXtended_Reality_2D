@@ -1,33 +1,108 @@
-# Term-2DGame
+# 소라게 플랫포머
 
-A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
+## 프로젝트 개요
 
-This project was generated with a template including simple application launchers and an `ApplicationAdapter` extension that draws libGDX logo.
+이 프로젝트는 LibGDX 프레임워크와 Box2D 물리 엔진을 기반으로 개발된 2D 플랫포머 게임입니다. 플레이어의 다양한 움직임(대시, 벽 타기, 공격)을 구현했으며, JSON 기반 레벨 시스템을 통해 유연한 맵 디자인과 상호작용 가능한 오브젝트 배치가 가능하도록 설계되었습니다. 각 레벨은 게임의 조작법을 익힐 수 있도록 튜토리얼 형식으로 구성되어 있습니다.
 
-## Platforms
+![예시 이미지](assets/images/main.png)
 
-- `core`: Main module with the application logic shared by all platforms.
-- `lwjgl3`: Primary desktop platform using LWJGL3; was called 'desktop' in older docs.
+-----
 
-## Gradle
+## 주요 기능
 
-This project uses [Gradle](https://gradle.org/) to manage dependencies.
-The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands.
-Useful Gradle tasks and flags:
+### 1. 플레이어
 
-- `--continue`: when using this flag, errors will not stop the tasks from running.
-- `--daemon`: thanks to this flag, Gradle daemon will be used to run chosen tasks.
-- `--offline`: when using this flag, cached dependency archives will be used.
-- `--refresh-dependencies`: this flag forces validation of all dependencies. Useful for snapshot versions.
-- `build`: builds sources and archives of every project.
-- `cleanEclipse`: removes Eclipse project data.
-- `cleanIdea`: removes IntelliJ project data.
-- `clean`: removes `build` folders, which store compiled classes and built archives.
-- `eclipse`: generates Eclipse project data.
-- `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
-- `lwjgl3:run`: starts the application.
-- `test`: runs unit tests (if any).
+* **다양한 상태 및 애니메이션:** 플레이어는 `IDLE`, `WALK`, `JUMP`, `FALL`, `ATTACK`, `WALL_SLIDE`, `DASH`, `DEAD` 등 다양한 상태를 가지며, 각 상태별 애니메이션을 재생합니다.
+* **물리 기반 충돌:** Box2D의 `PlayerContactListener`를 통해 발, 측면, 공격 센서 등 4가지 센서를 사용하여 지면/벽 접촉 및 공격 충돌을 감지합니다.
+* **특수 동작:**
+    * **벽 타기 :** 벽에 붙어 이동이 가능해지며, 플레이어 위에 스태미너 바를 시각화하여 사용 시간을 제한합니다.
+    ![벽 타기 이미지](assets/images/wall.gif)<br><br>
+    * **공격:** 방향에 따른 센서를 생성하여 오브젝트 파괴를 가능하게 하며, `AttackEffect` 클래스를 통한 시각적 효과를 동반합니다.
+    ![공격 이미지](assets/images/attack.gif)<br><br>
+    * **대시 :** 짧은 시간동안 빠르게 이동하며, `DashEffect` 클래스를 통한 시각적 효과를 동반합니다.
+    ![대시 이미지](assets/images/dash.gif)
+### 2. 월드 및 레벨
 
-Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
-For example, `core:clean` removes `build` folder only from the `core` project.
+* **게임 상태 머신:** `Main.java`의 `GameState` (`RUNNING`, `PAUSED`, `CLEARED`, `ENDED`, `DEAD`)를 통해 게임의 전반적인 흐름을 제어합니다.
+* **JSON 기반 레벨 로딩:** `Level.java`가 `levels/*.json` 파일로부터 레벨 크기, 플레이어 시작 위치, 그리고 모든 블록 및 아이콘 데이터를 동적으로 파싱합니다.
+
+### 3. 상호작용 및 시각 효과
+
+* **상호작용:**
+    * **`BoxObject` (상자):** 플레이어의 공격으로 파괴 가능한 오브젝트입니다.
+    * **`FlagObject` (깃발):** 센서로 작동하며, 접촉 중 상호작용시 레벨 클리어(`CLEARED`) 상태로 전환되고 다음 레벨을 로드합니다.
+    * **`SignObject` (표지판):** 접촉 시 사용한 한글을 띄워 메시지를 표시합니다.
+* **화면 전환:**
+    * **(`FadeEffect`):** **OpenGL Stencil Buffer** 기능을 활용하여 원형 페이드 아웃/인 및 전체 화면 페이드 인/아웃 효과를 구현하여 시각적 완성도를 높였습니다.
+    ![화면 전환 이미지](assets/images/fadeinout.gif)
+-----
+
+## 프로젝트 구조
+
+### 1. Java 패키지 (core/src/main/java)
+
+#### `io.Term_2D_Game` (Core)
+
+| 클래스 | 역할 | 주요 기능 |
+| :--- | :--- | :--- |
+| **`Main.java`** | **게임 진입점 및 상태 관리** | `GameState`에 따라 `GameWorld`의 업데이트 및 렌더링을 분기 처리하고 UI를 출력합니다. |
+| **`GameWorld.java`** | **물리 월드 및 객체 관리** | Box2D `World`를 생성 및 스텝 처리. `Player`, `BlockObject` 리스트, `PlayerEffect` 리스트를 관리하고 레벨 로드 및 리스타트 로직을 수행합니다. |
+| **`Assets.java`** | **통합 리소스 관리** | 모든 텍스처, 애니메이션을 로드하고 관리합니다. |
+| **`Level.java`** | **레벨 파싱 및 초기화** | JSON 파일로부터 레벨 데이터를 읽어와 레벨을 로드합니다. |
+| **`FadeEffect.java`** | **화면 전환 효과** | Stencil 기법을 이용한 원형 페이드 효과 및 전체 화면 페이드 인/아웃을 구현합니다. |
+| **`CameraManager.java`** | **게임 카메라 제어** | 플레이어를 따라다니는 카메라를 업데이트하며, 맵 경계를 벗어나지 않도록 시야를 고정합니다. |
+
+#### `io.Term_2D_Game.Player` (플레이어 시스템)
+
+| 클래스 | 역할 | 주요 기능                                                                                                                     |
+| :--- | :--- |:--------------------------------------------------------------------------------------------------------------------------|
+| **`Player.java`** | **플레이어 메인 로직** | 플레이어의 물리 이동, 애니메이션 상태 전환, 벽 타기 스태미너, 공격 및 대시 동작을 제어합니다.                                                                   |
+| **`PlayerContactListener.java`** | **Box2D 충돌 처리** | `footSensor`, `leftSensor`, `rightSensor`, `attackSensor`를 사용하여 플레이어와 지형/오브젝트 간의 충돌을 감지하고 `Player` 클래스의 상태 변경 메서드를 호출합니다. |
+| **`AttackEffect.java` / `DashEffect.java`** | **시각 효과** | 공격 및 대시 시점에 `GameWorld`에 추가되어 특정 `lifeTime` 동안 재생되는 애니메이션 효과를 담당합니다.                                                      |
+| **`PlayerEffect.java`** | **효과 추상 클래스** | 모든 플레이어 시각 효과의 경과 시간 및 생명 주기를 관리합니다.                                                                                      |
+
+#### `io.Term_2D_Game.Objects` (오브젝트)
+
+| 클래스 | 역할 | 주요 기능                                                |
+| :--- | :--- |:-----------------------------------------------------|
+| **`BlockObject.java`** | **모든 오브젝트의 기본 추상 클래스** | 모든 블록의 공통 변수 및 Box2D Body 생성 로직을 포함합니다.              |
+| **`BoxObject.java`** | **파괴 가능한 상자** | 플레이어의 공격과 상호작용하여 Box2D 월드에서 Body가 제거(파괴)됩니다.         |
+| **`FlagObject.java`** | **레벨 클리어 지점** | 센서(Sensor) 타입으로 설정되어 플레이어와 접촉 시 `CLEARED` 상태로 전환됩니다. |
+| **`SandObject.java`** | **지형 블록** | 레벨 구성을 위한 정적(Static) 물리 바디를 가진 기본 지형 블록입니다.          |
+| **`StoneObject.java`** | **지형 블록** | 레벨 구성을 위한 정적(Static) 물리 바디를 가진 벽타기가 가능한 지형 블록입니다.    |
+| **`SignObject.java`** | **정보 표지판** | 센서로 작동하며, `message` 필드를 출력하는 상호작용 오브젝트입니다.           |
+
+### 2. 리소스 폴더 (core/src/main/assets)
+
+| 폴더 | 역할 |
+| :--- | :--- | 
+| **`/levels`** | 게임 레벨의 구조, 블록 배치, 플레이어 시작 위치가 정의된 JSON 파일 |
+| **`/player`** | `player_walk.png`, `player_attack.png` 등 플레이어 애니메이션 스프라이트 시트 |
+| **`/objects`** | `sand_block.png`, `flag_red_a.png` 등 지형 및 사물 텍스처 |
+| **`/fonts`** | `Galmuri14.ttf` 등 게임 내 UI 및 표지판 메시지에 사용되는 폰트 파일 |
+| **`/inputs`** | 조작법 안내 등에 사용되는 아이콘 텍스처 |
+
+-----
+
+## 설치 및 실행 방법
+
+1.  **프로젝트 클론:**
+    터미널을 열고 원하는 위치에서 다음 명령어를 실행하여 프로젝트를 클론합니다.
+    ```bash
+    git clone https://github.com/Cha0910/Game_and_eXtended_Reality_2D.git
+    ```
+2.  **Gradle 실행:**
+    프로젝트의 루트 디렉토리에서 다음 명령어를 실행하여 데스크톱 버전을 빌드하고 실행합니다.
+    ```bash
+    gradlew.bat lwjgl3:run
+    ```
+
+-----
+
+## 기술 스택
+
+* **프레임워크:** LibGDX (with Box2D extension)
+* **개발 언어:** Java
+* **물리 엔진:** Box2D
+
+-----
