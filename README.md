@@ -89,7 +89,7 @@
 1.  **프로젝트 클론:**
     터미널을 열고 원하는 위치에서 다음 명령어를 실행하여 프로젝트를 클론합니다.
     ```bash
-    git clone https://github.com/Cha0910/Game_and_eXtended_Reality_2D.git
+    git clone https://github.com/Cha0910/Hermit-Crab-Platformer.git
     ```
 2.  **Gradle 실행:**
     프로젝트의 루트 디렉토리에서 다음 명령어를 실행하여 데스크톱 버전을 빌드하고 실행합니다.
